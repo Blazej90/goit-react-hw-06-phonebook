@@ -1,8 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteContact } from '../reducers/contactsSlice';
 import styles from './App.module.css';
 
-const ContactList = ({ contacts, handleDeleteContact }) => {
+const ContactList = () => {
+  const contacts = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
+
+  const handleDeleteContact = id => {
+    dispatch(deleteContact(id));
+  };
+
   return (
     <ul className={styles.contactList}>
       {contacts.map(contact => (
@@ -18,11 +26,6 @@ const ContactList = ({ contacts, handleDeleteContact }) => {
       ))}
     </ul>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.array.isRequired,
-  handleDeleteContact: PropTypes.func.isRequired,
 };
 
 export default ContactList;
