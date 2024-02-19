@@ -5,7 +5,13 @@ import styles from './App.module.css';
 
 const ContactList = () => {
   const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
+
+  const filteredContacts = contacts.filter(
+    contact =>
+      contact.name && contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
   const handleDeleteContact = id => {
     dispatch(deleteContact(id));
@@ -13,7 +19,7 @@ const ContactList = () => {
 
   return (
     <ul className={styles.contactList}>
-      {contacts.map(contact => (
+      {filteredContacts.map(contact => (
         <li key={contact.id} className={styles.contactItem}>
           {contact.name} - {contact.number}
           <button
