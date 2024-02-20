@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import contactsReducer from './reducers/contactsSlice';
-import filterReducer from './reducers/filterSlice';
+import contactsReducer from './contactsSlice';
+import filterReducer from './filterSlice';
 
 export default configureStore({
   reducer: {
