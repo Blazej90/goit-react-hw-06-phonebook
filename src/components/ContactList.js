@@ -15,6 +15,11 @@ const ContactList = () => {
 
   const handleDeleteContact = id => {
     dispatch(deleteContact(id));
+
+    const storedContacts = JSON.parse(localStorage.getItem('contacts'));
+
+    const updatedContacts = storedContacts.filter(contact => contact.id !== id);
+    localStorage.setItem('contacts', JSON.stringify(updatedContacts));
   };
 
   return (

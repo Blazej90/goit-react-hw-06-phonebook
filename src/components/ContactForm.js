@@ -28,42 +28,50 @@ const ContactForm = () => {
       alert(`${name} is already in contacts!`);
     } else {
       dispatch(addContact({ id: nanoid(), name, number }));
+
+      const storedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
+
+      const updatedContacts = [
+        ...storedContacts,
+        { id: nanoid(), name, number },
+      ];
+      localStorage.setItem('contacts', JSON.stringify(updatedContacts));
+
       setName('');
       setNumber('');
     }
   };
 
-  const handleKeyPress = event => {
-    if (event.key === 'Enter') {
-      handleAddContact();
-    }
+  const handleSubmit = event => {
+    event.preventDefault();
+    handleAddContact();
   };
 
   return (
     <div className={styles.appContainer}>
-      <p className={styles.name}>Name</p>
-      <label>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleNameChange}
-          onKeyDown={handleKeyPress}
-        />
-      </label>
-      <p className={styles.name}>Phone Number</p>
-      <label>
-        <input
-          type="tel"
-          name="number"
-          value={number}
-          onChange={handleNumberChange}
-          onKeyDown={handleKeyPress}
-        />
-      </label>
-      <button className={styles.addContactBtn} onClick={handleAddContact}>
-        Add contact
-      </button>
+      <form onSubmit={handleSubmit}>
+        <p className={styles.name}>Name</p>
+        <label>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleNameChange}
+          />
+        </label>
+        <p className={styles.name}>Phone Number</p>
+        <label>
+          <input
+            type="tel"
+            name="number"
+            value={number}
+            onChange={handleNumberChange}
+          />
+        </label>
+        <button className={styles.addContactBtn} type="submit">
+          Add contact
+        </button>
+      </form>
     </div>
   );
 };
