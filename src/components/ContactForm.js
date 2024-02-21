@@ -49,7 +49,7 @@ const ContactForm = () => {
 
   return (
     <div className={styles.appContainer}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.containerForm}>
         <p className={styles.name}>Name</p>
         <label>
           <input
