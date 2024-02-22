@@ -6,11 +6,11 @@
   justify-content: center;
 }
 
-/* .containerForm {
+.containerForm {
   display: flex;
   flex-direction: column;
   align-items: center;
-} */
+}
 
 .pageTitle {
   margin: 0;
